@@ -1,0 +1,200 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Performance optimizations */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Hide cursor on touch devices */
+@media (hover: none) {
+  .custom-cursor {
+    display: none;
+  }
+  
+  button.cursor-toggle {
+    display: none;
+  }
+}
+
+/* Enhanced Spline branding removal */
+spline-viewer::part(logo) {
+  display: none !important;
+}
+
+spline-viewer {
+  --spline-logo-display: none !important;
+}
+
+/* Comprehensive Spline watermark/branding removal */
+spline-viewer::shadow .spline-watermark,
+spline-viewer::shadow .logo,
+spline-viewer::shadow [class*="logo"],
+spline-viewer::shadow [class*="watermark"],
+spline-viewer::shadow [class*="branding"],
+spline-viewer::shadow [data-testid*="logo"],
+spline-viewer::shadow [data-testid*="watermark"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Hide any floating buttons in bottom corner */
+spline-viewer::shadow div[style*="position: absolute"][style*="bottom"],
+spline-viewer::shadow div[style*="position: fixed"][style*="bottom"] {
+  display: none !important;
+}
+
+/* Force hide any Spline UI elements */
+spline-viewer * {
+  --spline-ui-display: none !important;
+}
+
+/* Lite Mode Styles - Optimized for performance */
+.lite-mode * {
+  animation: none !important;
+  transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, opacity 0.3s ease !important;
+}
+
+/* Keep essential animations in lite mode */
+.lite-mode .animate-gradient-x,
+.lite-mode .animate-glitch,
+.lite-mode .animate-spin {
+  animation: revert !important;
+}
+
+/* Disable 3D transforms in lite mode for better performance */
+.lite-mode [style*="transform: translate3d"],
+.lite-mode [style*="transform: rotateY"],
+.lite-mode [style*="transform: rotateX"],
+.lite-mode [style*="transform: rotateZ"],
+.lite-mode [style*="transform: perspective"],
+.lite-mode [style*="transform-style: preserve-3d"] {
+  transform: none !important;
+  transform-style: flat !important;
+}
+
+/* Disable hover transforms in lite mode */
+.lite-mode .hover\:scale-105:hover,
+.lite-mode .hover\:scale-110:hover,
+.lite-mode .hover\:scale-125:hover,
+.lite-mode .group:hover .group-hover\:scale-110,
+.lite-mode .group:hover .group-hover\:scale-125 {
+  transform: none !important;
+}
+
+/* Disable hover rotations in lite mode */
+.lite-mode .hover\:rotate-y-6:hover,
+.lite-mode .hover\:rotate-y-12:hover,
+.lite-mode .group:hover .group-hover\:rotate-12 {
+  transform: none !important;
+}
+
+/* Disable hover translations in lite mode */
+.lite-mode .hover\:-translate-y-1:hover,
+.lite-mode .hover\:translate-x-2:hover,
+.lite-mode .hover\:translate-x-4:hover,
+.lite-mode .group:hover .group-hover\:translate-x-2,
+.lite-mode .group:hover .group-hover\:-translate-x-1 {
+  transform: none !important;
+}
+
+/* Disable shadows and glows in lite mode */
+.lite-mode .hover\:shadow-lg:hover,
+.lite-mode .hover\:shadow-xl:hover,
+.lite-mode .hover\:shadow-2xl:hover,
+.lite-mode .hover\:shadow-primary-500\/10:hover,
+.lite-mode .hover\:shadow-primary-500\/20:hover,
+.lite-mode .hover\:shadow-primary-600\/20:hover {
+  box-shadow: none !important;
+}
+
+/* Disable blur effects in lite mode */
+.lite-mode .blur-sm,
+.lite-mode .blur-md,
+.lite-mode .blur-lg,
+.lite-mode .blur-xl,
+.lite-mode .blur-2xl,
+.lite-mode .blur-3xl {
+  filter: none !important;
+}
+
+/* Keep essential transitions for usability */
+.lite-mode button,
+.lite-mode a,
+.lite-mode input,
+.lite-mode textarea {
+  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, opacity 0.2s ease !important;
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  /* Reduce motion on mobile for better performance */
+  .lite-mode * {
+    animation: none !important;
+    transform: none !important;
+  }
+  
+  /* Simplify mobile interactions */
+  .lite-mode .perspective-1000,
+  .lite-mode .perspective-1200,
+  .lite-mode .perspective-2000 {
+    perspective: none !important;
+  }
+  
+  /* Optimize images for mobile */
+  img {
+    image-rendering: optimizeSpeed;
+  }
+}
+
+/* Performance optimizations for low-end devices */
+@media (max-width: 480px) {
+  .lite-mode .backdrop-blur-sm,
+  .lite-mode .backdrop-blur-md,
+  .lite-mode .backdrop-blur-lg,
+  .lite-mode .backdrop-blur-xl {
+    backdrop-filter: none !important;
+    background-color: rgba(26, 26, 26, 0.9) !important;
+  }
+  
+  /* Reduce particle count on mobile */
+  .animate-float:nth-child(n+6) {
+    display: none;
+  }
+}
+
+/* Preload critical fonts */
+@font-face {
+  font-family: 'Inter';
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Orbitron';
+  font-display: swap;
+}
+
+/* Image optimization */
+img {
+  loading: lazy;
+  decoding: async;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
